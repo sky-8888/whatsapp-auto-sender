@@ -1,0 +1,13 @@
+# git ignore for python project
+venv/
+*.py[cod]
+*$py.class
+__pycache__/
+*.so
+*.egg
+*.egg-info
+dist/
+build/
+*.dev
+selenium/
+```
