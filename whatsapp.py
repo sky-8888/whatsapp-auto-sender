@@ -28,11 +28,11 @@ def whatsapp_init(user_data_dir: str):
     driver = webdriver.Chrome(chrome_options=chrome_options)
     driver.get("https://web.whatsapp.com/")
     driver.maximize_window()
-    # wait for user to scan QR code
-    # print it 10 times
     for i in range(10):
-        print(f"Waiting for QR code to be scanned {i}")
-        time.sleep(1)
+        print(f"Press enter after scanning QR code")
+    # wait for user to scan QR code
+    input("Press enter after scanning QR code")
+    print("QR code scanned successfully")
     driver.close()
 
 
