@@ -44,13 +44,6 @@ def start_message_loop(
 
 
 if __name__ == "__main__":
-    dir_path = os.getcwd()
-    user_data_dir = f"{dir_path}/selenium"
-    new_user = check_is_new_user(user_data_dir)
-    if new_user:
-        whatsapp_init(user_data_dir)
-    group_id = input("Enter group id: ")
-    send_hour = 7
     # a list of messages saying good morning and asking clients if things are fine
     messages = [
         "Good morning! How is everything today?",
@@ -65,5 +58,20 @@ if __name__ == "__main__":
         "Hi, how is everything today?",
     ]
 
+    dir_path = os.getcwd()
+    user_data_dir = f"{dir_path}/selenium"
+    new_user = check_is_new_user(user_data_dir)
+    if new_user:
+        whatsapp_init(user_data_dir)
+    group_id = input("Enter group id: ")
+
+    try:
+        send_hour = int(input("Enter send hour: "))
+    except ValueError:
+        send_hour = 7
+
+    if send_hour < 0:
+        send_message(group_id, random.choice(messages), user_data_dir)
+        exit(0)
     start_message_loop(send_hour, group_id, messages, user_data_dir)
     # send_message(group_id, random.choice(messages))

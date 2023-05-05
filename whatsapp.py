@@ -50,6 +50,8 @@ def send_message(group_id: str, message: str, user_data_dir: str):
     # https://web.whatsapp.com/accept?code=
     driver.get(f"https://web.whatsapp.com/accept?code={group_id}")
     driver.maximize_window()
+    # wait for the page to load
+    time.sleep(60)
 
     # find the input box
     inp_xpath = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]'
