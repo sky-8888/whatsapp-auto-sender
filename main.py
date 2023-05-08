@@ -36,8 +36,18 @@ def start_message_loop(
         now = datetime.datetime.now()
         # get sleep time
         sleep_time, sleep_until = get_sleep_time(send_hour, now)
-        print(f"Sleeping until {sleep_until}")
-        time.sleep(sleep_time)
+
+        # check if current time is same as sleep_until
+        while now < sleep_until:
+            time_till = sleep_until - now
+            # print as log
+            print(
+                f"{now.strftime('%Y-%m-%d %H:%M:%S')} - Sleeping for {time_till.seconds} seconds until {sleep_until.strftime('%Y-%m-%d %H:%M:%S')}"
+            )
+            # sleep for 10 seconds
+            time.sleep(10)
+            now = datetime.datetime.now()
+
         # send message
         send_message(group_id, random.choice(messages), user_data_dir)
         time.sleep(10)
