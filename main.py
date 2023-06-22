@@ -3,6 +3,7 @@ import os
 import time
 import random
 from whatsapp import check_is_new_user, send_message, whatsapp_init
+import holidays
 
 
 def get_sleep_time(send_hour: int, now: datetime.datetime):
@@ -29,6 +30,16 @@ def get_sleep_time(send_hour: int, now: datetime.datetime):
     return sleep_time, sleep_until
 
 
+def is_today_holiday():
+    now = datetime.datetime.now()
+    hk_holidays = holidays.HK(years=now.year)  # type: ignore
+    for holiday in hk_holidays:
+        today = now.strftime("%Y-%m-%d")
+        if today == holiday.strftime("%Y-%m-%d"):
+            return True
+    return False
+
+
 def start_message_loop(
     send_hour: int, group_id: str, messages: list, user_data_dir: str
 ):
@@ -49,8 +60,9 @@ def start_message_loop(
             now = datetime.datetime.now()
 
         # send message
-        send_message(group_id, random.choice(messages), user_data_dir)
-        time.sleep(10)
+        if not is_today_holiday():
+            send_message(group_id, random.choice(messages), user_data_dir)
+            time.sleep(10)
 
 
 if __name__ == "__main__":
