@@ -11,6 +11,16 @@ import datetime
 import time
 import os
 
+import pywhatkit
+
+
+def pywhatskit_send(group_id: str, message: str):
+    pywhatkit.sendwhatmsg_to_group_instantly(  # type: ignore
+        group_id, message, wait_time=20, tab_close=True
+    )
+    print(f"Message sent successfully at {datetime.datetime.now()}")
+    time.sleep(10)
+
 
 def check_is_new_user(user_data_dir: str):
     # check if the user_data_dir exists
