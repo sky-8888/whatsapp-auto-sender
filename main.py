@@ -40,7 +40,9 @@ def is_today_holiday():
     return False
 
 
-def start_message_loop(send_hour: int, group_id: str, messages: list):
+def start_message_loop(
+    send_hour: int, group_id: str, messages: list, user_data_dir: str
+):
     while True:
         now = datetime.datetime.now()
         # get sleep time
@@ -59,8 +61,8 @@ def start_message_loop(send_hour: int, group_id: str, messages: list):
 
         # send message
         if not is_today_holiday():
-            # send_message(group_id, random.choice(messages), user_data_dir)
-            pywhatskit_send(group_id, random.choice(messages))
+            send_message(group_id, random.choice(messages), user_data_dir)
+            # pywhatskit_send(group_id, random.choice(messages))
             time.sleep(10)
 
 
@@ -79,11 +81,11 @@ if __name__ == "__main__":
         "Hi, how is everything today?",
     ]
 
-    # dir_path = os.getcwd()
-    # user_data_dir = f"{dir_path}/selenium"
-    # new_user = check_is_new_user(user_data_dir)
-    # if new_user:
-    #     whatsapp_init(user_data_dir)
+    dir_path = os.getcwd()
+    user_data_dir = f"{dir_path}/selenium"
+    new_user = check_is_new_user(user_data_dir)
+    if new_user:
+        whatsapp_init(user_data_dir)
     group_id = input("Enter group id: ")
 
     try:
@@ -92,8 +94,8 @@ if __name__ == "__main__":
         send_hour = 7
 
     if send_hour < 0:
-        # send_message(group_id, random.choice(messages), user_data_dir)
-        pywhatskit_send(group_id, random.choice(messages))
+        send_message(group_id, random.choice(messages), user_data_dir)
+        # pywhatskit_send(group_id, random.choice(messages))
         exit(0)
-    start_message_loop(send_hour, group_id, messages)
+    start_message_loop(send_hour, group_id, messages, user_data_dir)
     # send_message(group_id, random.choice(messages))

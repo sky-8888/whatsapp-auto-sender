@@ -50,7 +50,7 @@ def send_message(group_id: str, message: str, user_data_dir: str):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument(f"user-data-dir={user_data_dir}")
     # run in headless mode
-    chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--headless")
     temp_driver = webdriver.Chrome()
     user_agent = temp_driver.execute_script("return navigator.userAgent;")
     temp_driver.close()
