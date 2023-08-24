@@ -35,7 +35,7 @@ def check_is_new_user(user_data_dir: str):
 def whatsapp_init(user_data_dir: str):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument(f"user-data-dir={user_data_dir}")
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
     driver.get("https://web.whatsapp.com/")
     driver.maximize_window()
     for i in range(10):
@@ -55,7 +55,7 @@ def send_message(group_id: str, message: str, user_data_dir: str):
     user_agent = temp_driver.execute_script("return navigator.userAgent;")
     temp_driver.close()
     chrome_options.add_argument(f"user-agent={user_agent}")
-    driver = webdriver.Chrome(chrome_options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
 
     # https://web.whatsapp.com/accept?code=
     driver.get(f"https://web.whatsapp.com/accept?code={group_id}")
